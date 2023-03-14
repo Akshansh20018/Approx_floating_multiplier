@@ -103,6 +103,8 @@ def approx(num,h):
     print(float_to_binary(approx))
     return float_to_binary(approx)[2:]+ "0"*(32-len(float_to_binary(approx)[2:]))
 
+1.01 * 2^2
+
 #places 
 def getError(a,b,h,t):
     bin_a = float_bin(a)
@@ -127,7 +129,8 @@ def getError(a,b,h,t):
 
     y_apx = binary_to_float(y_apx)
     y_bpx = binary_to_float(y_bpx)
-
+    // 1.01 * 2^2
+    
     num = (1 +y_at+y_bt + y_apx*y_bpx)*2**(ka+kb)
     return abs(num - a*b)/(a*b)
 
@@ -161,8 +164,8 @@ error_lst= []
 tests = pow(2,16)-1
 
 for tata in range (0, tests):
-    a_lst.append(random.randint(1, pow(2,8)-1))
-    b_lst.append(random.randint(1, pow(2,8)-1))
+    a_lst.append(random.randint(1, pow(2,32)-1))
+    b_lst.append(random.randint(1, pow(2,32)-1))
 total_error = 0
 for tata in range (0, tests):
     a= a_lst[tata]

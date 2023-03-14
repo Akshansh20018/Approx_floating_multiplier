@@ -144,25 +144,42 @@ def shifter(ka, kb, ans):
 
 a_lst= []
 b_lst= []
+
+
 res_apox_lst= []
 res_accu_lst= []
 error_lst= []
 tests = pow(2,16)-1
 
 for tata in range (0, tests):
-    a_lst.append(random.randint(1, pow(2,32)-1) + random.random())
-    b_lst.append(random.randint(1, pow(2,32)-1) +  random.random())
+    a_lst.append(random.randint(1, pow(2,16)-1) + random.random())
+    b_lst.append(random.randint(1, pow(2,16)-1) +  random.random())
 
-total_error = 0
+total_error_int = 0
+total_error_float = 0
+# (1.01 * 2^ka)
+# (1.01 * 2^kb)
+
 for tata in range (0, tests):
-    a= a_lst[tata]
-    b= b_lst[tata]
-    h= 0
-    t= 2
-    mul_appx = getMultiply(a,b,h,t)
-    mul_acc = a*b
+    a_int = int(a_lst[tata])
+    b_int = int(b_lst[tata])
 
-    error = abs(mul_appx - mul_acc)/mul_acc
-    total_error += error
+    a_float = a_lst[tata]
+    b_float = b_lst[tata]
 
-print("Average Error: ", 100*(total_error/tests))
+    h= 5
+    t= 9
+    mul_appx_int = getMultiply(float(a_int),float(b_int),h,t)
+    mul_acc_int = a_int*b_int
+
+    mul_appx_float = getMultiply(a_float,b_float,h,t)
+    mul_acc_float = a_float*b_float
+
+    error_int = abs(mul_appx_int - mul_acc_int)/mul_acc_int
+    error_float = abs(mul_appx_float - mul_acc_float)/mul_acc_float
+    
+    total_error_int += error_int
+    total_error_float += error_float
+
+print("Average Error(Int): ", 100*(total_error_int/tests))
+print("Average Error(Float): ", 100*(total_error_float/tests))
